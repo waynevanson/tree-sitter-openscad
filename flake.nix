@@ -6,17 +6,12 @@
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          check = pkgs.writeShellScriptBin "check" ''
-            tree-sitter generate && tree-sitter test $@
-          '';
         in
         {
           devShell = pkgs.mkShell {
             buildInputs = with pkgs; [
-              check
-              # I have a custom fork I'm using but others may want 'tree-sitter'
               # or you can use 'npx tree-sitter <command>'
-              # tree-sitter
+              tree-sitter
               #
               # needed to build the grammar with 'tree-sitter generate'
               nodejs
